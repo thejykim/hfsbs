@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { clientID, secretID } from "../keys";
 
 const Auth = ({ access_token }) => {
 	const router = useRouter();
@@ -36,8 +35,8 @@ export async function getServerSideProps(context) {
 
 	const res = await axios.post("https://hackforums.net/api/v2/authorize", {
 		grant_type: "authorization_code",
-		client_id: clientID,
-		client_secret: secretID,
+		client_id: process.env.CLIENT_ID,
+		client_secret: process.env.SECRET_ID,
 		code: code,
 	});
 

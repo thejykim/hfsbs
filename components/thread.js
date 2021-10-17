@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { Container } from "reactstrap";
 import { useCookies } from "react-cookie";
-import { clientID } from "../keys";
 
-const Thread = ({ action, tid }) => {
+const Thread = ({ action, tid, clientID }) => {
 	if (GetAccessToken()) {
 		return (
 			<div>
