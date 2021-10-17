@@ -19,10 +19,8 @@ const Auth = ({ access_token }) => {
 			<Head>
 				<title>Authorizing user... | hfsbs</title>
 			</Head>
-			{code ? (
-				<code>
-					Code: {code}, state: {state}
-				</code>
+			{access_token ? (
+				<code>Success! Redirecting you back...</code>
 			) : (
 				<code>Error code 500: Authorization code not found.</code>
 			)}
@@ -31,20 +29,29 @@ const Auth = ({ access_token }) => {
 };
 
 export async function getServerSideProps(context) {
-	const { code, state } = context.req.__NEXT_INIT_QUERY;
+	try {
+		const { code, state } = context.req.__NEXT_INIT_QUERY;
 
-	const res = await axios.post("https://hackforums.net/api/v2/authorize", {
-		grant_type: "authorization_code",
-		client_id: process.env.CLIENT_ID,
-		client_secret: process.env.SECRET_ID,
-		code: code,
-	});
+		const res = await axios.post("https://hackforums.net/api/v2/authorize", {
+			grant_type: "authorization_code",
+			client_id: process.env.CLIENT_ID,
+			client_secret: process.env.SECRET_ID,
+			code: code,
+		});
 
-	return {
-		props: {
-			access_token: res.data["access_token"],
-		},
-	};
+		return {
+			props: {
+				access_token: res.data["access_token"],
+			},
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			props: {
+				access_token: null,
+			},
+		};
+	}
 }
 
 const SetAccessToken = (newToken) => {
