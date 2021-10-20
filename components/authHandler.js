@@ -25,3 +25,5 @@ const AuthHandler = ({ access_token, state }) => {
 		</Container>
 	);
 };
+
+export default AuthHandler;
