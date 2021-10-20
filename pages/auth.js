@@ -9,11 +9,13 @@ const Auth = ({ access_token }) => {
 	const router = useRouter();
 	const { code, state } = router.query;
 
-	if (access_token) {
-		SetAccessToken(access_token);
-		console.log(access_token);
-		Router.push("/" + state);
-	}
+	const componentDidMount = () => {
+		if (access_token) {
+			SetAccessToken(access_token);
+			console.log(access_token);
+			Router.push("/" + state);
+		}
+	};
 
 	return (
 		<Container>
