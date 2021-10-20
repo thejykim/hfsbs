@@ -32,9 +32,13 @@ export async function getServerSideProps(context) {
 	try {
 		const { code, state } = context.req.__NEXT_INIT_QUERY;
 
+		console.log(code, state);
+
 		const res = await axios.get(
-			"http://hfsbs.x10.mx/hf-auth.php?code=" + code + "?state=" + state
+			"http://hfsbs.x10.mx/hf-auth.php?code=" + code + "&state=" + state
 		);
+
+		console.log(res);
 
 		return {
 			props: {
@@ -42,7 +46,7 @@ export async function getServerSideProps(context) {
 			},
 		};
 	} catch (error) {
-		console.error(error);
+		console.log(error);
 		return {
 			props: {
 				access_token: null,
