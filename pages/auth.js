@@ -32,12 +32,9 @@ export async function getServerSideProps(context) {
 	try {
 		const { code, state } = context.req.__NEXT_INIT_QUERY;
 
-		const res = await axios.post("https://hackforums.net/api/v2/authorize", {
-			grant_type: "authorization_code",
-			client_id: process.env.CLIENT_ID,
-			client_secret: process.env.SECRET_ID,
-			code: code,
-		});
+		const res = await axios.get(
+			"http://hfsbs.x10.mx/hf-auth.php?code=" + code + "?state=" + state
+		);
 
 		return {
 			props: {
