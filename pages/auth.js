@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 import { useCookies } from "react-cookie";
@@ -11,7 +12,7 @@ const Auth = ({ access_token }) => {
 	if (access_token) {
 		SetAccessToken(access_token);
 		console.log(access_token);
-		window.location = state;
+		Router.push("/" + state);
 	}
 
 	return (
@@ -32,13 +33,9 @@ export async function getServerSideProps(context) {
 	try {
 		const { code, state } = context.req.__NEXT_INIT_QUERY;
 
-		console.log(code, state);
-
 		const res = await axios.get(
 			"http://hfsbs.x10.mx/hf-auth.php?code=" + code + "&state=" + state
 		);
-
-		console.log(res);
 
 		return {
 			props: {
@@ -46,7 +43,6 @@ export async function getServerSideProps(context) {
 			},
 		};
 	} catch (error) {
-		console.log(error);
 		return {
 			props: {
 				access_token: null,
