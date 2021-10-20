@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import AuthHandler from "../components";
 
 const Auth = ({ access_token }) => {
 	const router = useRouter();
@@ -11,8 +12,6 @@ const Auth = ({ access_token }) => {
 
 	useEffect(() => {
 		if (access_token && state) {
-			SetAccessToken(access_token);
-			console.log(access_token);
 			router.push("/" + state);
 		}
 	}, [access_token, state]);
@@ -22,11 +21,8 @@ const Auth = ({ access_token }) => {
 			<Head>
 				<title>Authorizing user... | hfsbs</title>
 			</Head>
-			{access_token ? (
-				<code>Success! Redirecting you back...</code>
-			) : (
-				<code>Error code 500: Authorization code not found.</code>
-			)}
+
+			<AuthHandler access_token={access_token} state={state} />
 		</Container>
 	);
 };

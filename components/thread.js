@@ -38,6 +38,4 @@ const GetAccessToken = () => {
 	return cookies.access_token;
 };
 
-const GetNewToken = () => {};
-
 export default Thread;
