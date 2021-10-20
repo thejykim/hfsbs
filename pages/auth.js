@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Container } from "reactstrap";
@@ -9,11 +9,13 @@ const Auth = ({ access_token }) => {
 	const router = useRouter();
 	const { code, state } = router.query;
 
-	if (access_token && state) {
-		SetAccessToken(access_token);
-		console.log(access_token);
-		router.push("/" + state);
-	}
+	useEffect(() => {
+		if (access_token && state) {
+			SetAccessToken(access_token);
+			console.log(access_token);
+			router.push("/" + state);
+		}
+	}, [access_token, state]);
 
 	return (
 		<Container>
