@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Router from "next/router";
 import { useRouter } from "next/router";
@@ -9,13 +10,13 @@ const Auth = ({ access_token }) => {
 	const router = useRouter();
 	const { code, state } = router.query;
 
-	const componentDidMount = () => {
-		if (access_token) {
+	useEffect(() => {
+		if (access_token && state) {
 			SetAccessToken(access_token);
 			console.log(access_token);
 			Router.push("/" + state);
 		}
-	};
+	});
 
 	return (
 		<Container>
