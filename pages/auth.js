@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import AuthHandler from "../components";
+import AuthHandler from "../components/authHandler";
 
 const Auth = ({ access_token }) => {
 	const router = useRouter();
