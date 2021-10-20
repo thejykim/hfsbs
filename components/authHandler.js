@@ -7,7 +7,7 @@ const AuthHandler = ({ access_token, state }) => {
 	const router = useRouter();
 	const [accessCookie, setAccessCookie] = useCookies(["access_token"]);
 
-	setAccessCookie("access_token", newToken, { path: "/" });
+	setAccessCookie("access_token", access_token, { path: "/" });
 	setTimeout(() => {
 		router.push("/" + state);
 	}, 1000);
